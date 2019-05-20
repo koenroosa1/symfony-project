@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Bestelling;
-use App\Entity\Gerecht;
 use App\Entity\MenuItem;
 use App\Entity\Reservering;
-use App\Entity\Subgerecht;
-use phpDocumentor\Reflection\Types\Array_;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -121,8 +121,13 @@ class BestellingenController extends AbstractController
 
     /**
      * @Route("/bestellingen/confirm", name="bestellingen_confirm")
+     * @param Request $request
+     * @param EntityManager $em
+     * @return Response
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    public function confirm(Request $request)
+    public function confirm(Request $request, EntityManagerInterface $em)
     {
         $id = $request->get('id');
         //Reservering ophalen
@@ -131,9 +136,33 @@ class BestellingenController extends AbstractController
             ->find($id);
 
         if ($request->isMethod('post')){
-            foreach ($_POST as $item){
+            foreach ($_POST as $key => $val){
+                $menuItemCodeId = $this->getDoctrine()
+                    ->getRepository(MenuItem::class)
+                    ->findBy(
+                        array('MenuItem' => $key)
+                    );
                 $bestelling = new Bestelling();
-
+                $bestelling->setAantal($val);
+                foreach ($menuItemCodeId as $menuItem){
+                    $bestelling->setMenuItemcode($menuItem);
+                    $bestelling->setPrijs($menuItem->getPrijs() * $val);
+                }
+                $bestelling->setTafel($reservering->getTafel());
+                $bestelling->setDatum(date('Y-m-d'));
+                $bestelling->setTijd(time());
+                try {
+                    $em->persist($bestelling);
+                } catch (ORMException $e) {
+                    throw new \Exception($e);
+                }
+            }
+            try {
+                $em->flush();
+            } catch (OptimisticLockException $e) {
+                throw new OptimisticLockException($e, $bestelling);
+            } catch (ORMException $e) {
+                throw new ORMException($e);
             }
         }
 

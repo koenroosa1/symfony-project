@@ -10,15 +10,14 @@
 
     <div class="d-block bg-primary" id="sidebar">
         <ul class="sidebar-nav">
-            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Bestellingen</button>
+            <button class="btn btn-secondary" onclick="location.href='{{ path('receipt') }}?id={{ app.request.get('id') }}'">Bon maken</button>
             <br>
-            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Reserveringen
+            <button class="btn btn-secondary" onclick="location.href='/'">Terug
             </button>
             <br>
-            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Overzichten</button>
+            <button class="btn btn-secondary" onclick="location.href='{{ path('reservering_index') }}'">Andere tafel</button>
             <br>
-            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Gegevens</button>
-            <br>
+
         </ul>
     </div>
     <div class="">
@@ -427,7 +426,7 @@
     </table>
 
     <button id="annuleren" name="annuleren" class="btn btn-danger">Annuleren</button>
-    <button name="opslaan" class="btn btn-primary" onclick="location.href='/bestellingen/confirm'">Opslaan</button>
+    <button name="opslaan" class="btn btn-primary" onclick="location.href='/bestellingen/confirm?id={{ app.request.get('id') }}'">Opslaan</button>
 
     <script>
         $(function () {
