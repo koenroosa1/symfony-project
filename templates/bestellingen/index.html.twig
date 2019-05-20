@@ -3,27 +3,438 @@
 {% block title %}Bestelling{% endblock %}
 
 {% block body %}
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+
     <div class="d-block bg-primary" id="sidebar">
-        <ul id="sidebar-nav nav">
-            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Bestellingen</button><br>
-            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Reserveringen</button><br>
-            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Overzichten</button><br>
-            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Gegevens</button><br>
+        <ul class="sidebar-nav">
+            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Bestellingen</button>
+            <br>
+            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Reserveringen
+            </button>
+            <br>
+            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Overzichten</button>
+            <br>
+            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Gegevens</button>
+            <br>
         </ul>
     </div>
     <div class="">
-        <h1>{{ Reservering.tafel }}</h1>
+        <h1>Tafel {{ Reservering.tafel }}</h1>
     </div>
-    <div class="d-block bg-">
-        <table>
+
+    <h2>Voorgerechten</h2>
+    <table class="table" style="width: 100%">
+        <thead>
+        <tr>
+            <th>
+                Warme voorgerechten
+            </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in menuItem1sub1 %}
+            <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>
+                Koude voorgerechten
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem1sub2 %}
+            <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h2>Hoofdgerechten</h2>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>
+                Vis gerechten
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem2sub1 %}
+            <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>
+                Vlees gerechten
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem2sub2 %}
+            <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>
+                Vegetarische gerechten
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem2sub3 %}
+            <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h2>Nagerechten</h2>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>
+                Ijs
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem3sub1 %}
+            <<tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>
+                Mousse
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem3sub1 %}
+            <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h2>Warme Dranken</h2>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
             <th>
                 Warme Dranken
             </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem4 %}
+           <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h2>Bieren</h2>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
             <th>
-                Koude Dranken
+                Bieren
             </th>
-            {% for %}
-        </table>
-    </div>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem5 %}
+            <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h2>Wijnen</h2>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>
+                Huiswijnen
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem6 %}
+            <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h2>Frisdranken</h2>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>
+                Frisdranken
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem7 %}
+            <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h2>Warme hapjes</h2>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>
+                Warme hapjes
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem8 %}
+           <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h2>Koude hapjes</h2>
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>
+                Koude hapjes
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in MenuItem9 %}
+            <tr>
+                <td>
+                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
+                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <div id="number{{ item.MenuItem|default }}"></div>
+                </td>
+            </tr>
+            <script>
+                $(function () {
+                    var clicks = 0;
+                    $('#button{{ item.MenuItem|default }}').on('click', function () {
+                        clicks = clicks + 1;
+                        document.cookie = "{{ item.MenuItem }}=" + clicks;
+                        document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
+                    });
+                });
+            </script>
+        {% endfor %}
+        </tbody>
+    </table>
 
+    <button id="annuleren" name="annuleren" class="btn btn-danger">Annuleren</button>
+    <button name="opslaan" class="btn btn-primary" onclick="location.href='/bestellingen/confirm'">Opslaan</button>
+
+    <script>
+        $(function () {
+            var clicks = 0;
+            $('#annuleren').on('click', function () {
+                location.href = '/';
+            });
+        });
+    </script>
 {% endblock %}

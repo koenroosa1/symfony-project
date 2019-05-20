@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bestelling{% endblock %}
+
+{% block body %}
+    <div class="d-block bg-primary" id="sidebar">
+        <ul class="sidebar-nav">
+            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Bestellingen</button><br>
+            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Reserveringen</button><br>
+            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Overzichten</button><br>
+            <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Gegevens</button><br>
+        </ul>
+    </div>
+    <div class="text-center">
+        <h2>Kloppen de ingevoerde gegevens</h2>
+        <form method="post" action="{{ path('bestellingen_confirm') }}" class="form">
+            {% for item in data %}
+                <label for="item{{ _key }}">{{ _key }}
+                    <input type="number" name="value{{ _key }}" value="{{ item }}" class="form-control">
+                </label><br>
+            {% endfor %}
+
+            <button type="button" value="annuleren" onclick="location.href='/'" class="btn btn-danger">Anuleren</button>
+            <input type="submit" class="btn btn-primary" value="Opslaan">
+        </form>
+    </div>
+
+
+{% endblock %}
