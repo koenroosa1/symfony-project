@@ -1,25 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Bestelling{% endblock %}
+{% block header %} <div class="d-block bg-primary" id="sidebar">
+    <ul class="sidebar-nav">
+        <button class="btn btn-secondary" onclick="location.href='{{ path('receipt') }}?id={{ app.request.get('id') }}'">Bon maken</button>
+        <br>
+        <button class="btn btn-secondary" onclick="location.href='/'">Terug
+        </button>
+        <br>
+        <button class="btn btn-secondary" onclick="location.href='{{ path('reservering_index') }}'">Andere tafel</button>
+        <br>
 
+    </ul>
+</div>
+{% endblock%}
 {% block body %}
     <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
 
-    <div class="d-block bg-primary" id="sidebar">
-        <ul class="sidebar-nav">
-            <button class="btn btn-secondary" onclick="location.href='{{ path('receipt') }}?id={{ app.request.get('id') }}'">Bon maken</button>
-            <br>
-            <button class="btn btn-secondary" onclick="location.href='/'">Terug
-            </button>
-            <br>
-            <button class="btn btn-secondary" onclick="location.href='{{ path('reservering_index') }}'">Andere tafel</button>
-            <br>
 
-        </ul>
-    </div>
     <div class="">
         <h1>Tafel {{ Reservering.tafel }}</h1>
     </div>

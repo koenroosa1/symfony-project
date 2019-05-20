@@ -3,20 +3,13 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
-<div class="d-block bg-primary" style="width: 18rem; height: 100%">
-    <ul id="menu">
-        <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Bestellingen</button><br>
-        <button class="btn btn-secondary" onclick="location.href='{{ path('reservering_index') }}'">Reserveringen</button><br>
-        <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Overzichten</button><br>
-        <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Gegevens</button><br>
-    </ul>
-</div>
 
     <!-- Page Content -->
+    <br><br>
     <form>
         <select multiple>
             {% for tafel in Tafels %}
-            <option>{{ tafel.tafel }}</option>
+            <option onclick="location.href='{{ path('bestellingen') }}?id={{ tafel.id }}'">&nbsp;&nbsp;{{ tafel.tafel }}&nbsp;&nbsp;</option>
             {% endfor %}
         </select>
     </form>

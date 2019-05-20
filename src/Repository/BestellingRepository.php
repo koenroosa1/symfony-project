@@ -22,29 +22,29 @@ class BestellingRepository extends ServiceEntityRepository
     // /**
     //  * @return Bestelling[] Returns an array of Bestelling objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findAllGrouped()
     {
         return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
+            ->innerJoin('b.MenuItemcode', 'a')
+            ->select('a.MenuItem', 'b.Aantal')
+            ->orderBy('b.Tijd', 'ASC')
+            ->orderBy('b.Tafel')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Bestelling
+    public function findAllReceipt()
     {
         return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
+            ->innerJoin('b.MenuItemcode', 'a')
+            ->select('a.MenuItem', 'b.Aantal', 'b.Tafel', 'b.Prijs', 'b.Datum', 'b.Tijd')
+            ->orderBy('b.Tijd', 'ASC')
+            ->orderBy('b.Tafel')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult()
+            ;
     }
-    */
+
 }

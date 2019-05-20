@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bestelling index{% endblock %}
+
+{% block body %}
+    <h1>Bestelling index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Gerecht</th>
+            <th>Aantal</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bestelling in bestellings %}
+            <tr>
+                <td>{{ bestelling.MenuItem }}</td>
+                <td>{{ bestelling.Aantal }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
