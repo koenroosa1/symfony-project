@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block body %}
+<div class="d-block bg-primary" style="width: 18rem; height: 100%">
+    <ul id="menu">
+        <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Bestellingen</button><br>
+        <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Reserveringen</button><br>
+        <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Overzichten</button><br>
+        <button class="btn btn-secondary" onclick="location.href='{{ path('bestellingen') }}'">Gegevens</button><br>
+    </ul>
+</div>
+
+    <!-- Page Content -->
+    <form>
+        <select multiple>
+            {% for tafel in Tafels %}
+            <option>{{ tafel.tafel }}</option>
+            {% endfor %}
+        </select>
+    </form>
+{% endblock %}
