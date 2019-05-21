@@ -19,6 +19,7 @@
         </thead>
         <tbody>
         {% for reservering in reserverings %}
+            {% if reservering.datum >= 'now'|date('Y-m-d') %}
             <tr onclick="location.href='/bestellingen?id={{ reservering.id }}'">
                 <td>{{ reservering.id }}</td>
                 <td>{{ reservering.Tafel }}</td>
@@ -31,9 +32,10 @@
                     <a href="{{ path('reservering_edit', {'id': reservering.id}) }}">edit</a>
                 </td>
             </tr>
+            {% endif %}
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Geen reserveringen gevonden</td>
             </tr>
         {% endfor %}
         </tbody>

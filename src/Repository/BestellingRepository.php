@@ -27,7 +27,7 @@ class BestellingRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('b')
             ->innerJoin('b.MenuItemcode', 'a')
-            ->select('a.MenuItem', 'b.Aantal', 'b.Datum')
+            ->select('a.MenuItem', 'b.Aantal', 'b.Datum', 'a.MenuItemcode')
             ->orderBy('b.Tijd', 'ASC')
             ->orderBy('b.Tafel')
             ->getQuery()

@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/bestelling")
+ * @Route("/overzicht_kok")
  */
-class BestellingController extends AbstractController
+class OverzichtKokController extends AbstractController
 {
     /**
      * @Route("/", name="bestelling_index", methods={"GET"})
@@ -23,8 +23,8 @@ class BestellingController extends AbstractController
      */
     public function index(BestellingRepository $bestellingRepository): Response
     {
-        return $this->render('bestelling/index.html.twig', [
-            'bestellings' => $bestellingRepository->findAllGrouped(),
+        return $this->render('overzicht_kok/index.html.twig', [
+            'bestellings' => $bestellingRepository->findAllGrouped()
         ]);
     }
 
