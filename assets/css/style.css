@@ -9,7 +9,7 @@
     float: right;
 }
 body{
-    background-color: #0000ff !important;
+    /*background-color: #0000ff !important;*/
     height: 255px;
 }
 
@@ -21,4 +21,9 @@ body{
 a{
     color: black !important;
     text-decoration: none !important;
+}
+
+.no-border {
+    border: 0 !important;
+    box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
 }

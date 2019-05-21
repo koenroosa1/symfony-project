@@ -46,32 +46,28 @@ class BestellingenController extends AbstractController
             ->getRepository(MenuItem::class)
             ->findAll();
         //Foreach door alle menu items
-        foreach ($menuItem as $item){
-            switch ($item->getMenuItemcode()){
+        foreach ($menuItem as $item) {
+            switch ($item->getMenuItemcode()) {
                 case '1':
-                    if ($item->getSubgerechtCode() == '1'){
+                    if ($item->getSubgerechtCode() == '1') {
                         array_push($menuItem1Sub1, $item);
-                    }
-                    elseif ($item->getSubgerechtCode() == '2'){
+                    } elseif ($item->getSubgerechtCode() == '2') {
                         array_push($menuItem1Sub2, $item);
                     }
                     break;
                 case '2':
-                    if ($item->getSubgerechtCode() == '1'){
+                    if ($item->getSubgerechtCode() == '1') {
                         array_push($menuItem2Sub1, $item);
-                    }
-                    elseif ($item->getSubgerechtCode() == '2'){
+                    } elseif ($item->getSubgerechtCode() == '2') {
                         array_push($menuItem2Sub2, $item);
-                    }
-                    elseif ($item->getSubgerechtCode() == '3'){
+                    } elseif ($item->getSubgerechtCode() == '3') {
                         array_push($menuItem2Sub3, $item);
                     }
                     break;
                 case '3':
-                    if ($item->getSubgerechtCode() == '1'){
+                    if ($item->getSubgerechtCode() == '1') {
                         array_push($menuItem3Sub1, $item);
-                    }
-                    elseif ($item->getSubgerechtCode() == '2'){
+                    } elseif ($item->getSubgerechtCode() == '2') {
                         array_push($menuItem3Sub2, $item);
                     }
                     break;
@@ -135,26 +131,54 @@ class BestellingenController extends AbstractController
             ->getRepository(Reservering::class)
             ->find($id);
 
-        if ($request->isMethod('post')){
-            foreach ($_POST as $key => $val){
-                $menuItemCodeId = $this->getDoctrine()
-                    ->getRepository(MenuItem::class)
-                    ->findBy(
-                        array('MenuItem' => $key)
-                    );
-                $bestelling = new Bestelling();
-                $bestelling->setAantal($val);
-                foreach ($menuItemCodeId as $menuItem){
-                    $bestelling->setMenuItemcode($menuItem);
-                    $bestelling->setPrijs($menuItem->getPrijs() * $val);
-                }
-                $bestelling->setTafel($reservering->getTafel());
-                $bestelling->setDatum(date('Y-m-d'));
-                $bestelling->setTijd(time());
-                try {
-                    $em->persist($bestelling);
-                } catch (ORMException $e) {
-                    throw new \Exception($e);
+        if ($request->isMethod('post')) {
+            foreach ($_POST as $key => $val) {
+                if (strpos($key, "prijs") !== false) {
+                    $value = 1;
+                    $naam = substr($key, 5);
+                    if (in_array($naam, $request->cookies->all())) {
+                        $value = $_COOKIE[$naam];
+                        unset($_COOKIE[$naam]);
+                    }
+                    $menuItemCodeId = $this->getDoctrine()
+                        ->getRepository(MenuItem::class)
+                        ->findBy(
+                            array('MenuItem' => $naam)
+                        );
+                    $bestelling = new Bestelling();
+                    $bestelling->setAantal($val);
+                    foreach ($menuItemCodeId as $menuItem) {
+                        $bestelling->setMenuItemcode($menuItem);
+                        $bestelling->setPrijs($val * $value);
+                    }
+                    $bestelling->setTafel($reservering->getTafel());
+                    $bestelling->setDatum(date('Y-m-d'));
+                    $bestelling->setTijd(time());
+                    try {
+                        $em->persist($bestelling);
+                    } catch (ORMException $e) {
+                        throw new \Exception($e);
+                    }
+                } else {
+                    $menuItemCodeId = $this->getDoctrine()
+                        ->getRepository(MenuItem::class)
+                        ->findBy(
+                            array('MenuItem' => $key)
+                        );
+                    $bestelling = new Bestelling();
+                    $bestelling->setAantal($val);
+                    foreach ($menuItemCodeId as $menuItem) {
+                        $bestelling->setMenuItemcode($menuItem);
+                        $bestelling->setPrijs($menuItem->getPrijs() * $val);
+                    }
+                    $bestelling->setTafel($reservering->getTafel());
+                    $bestelling->setDatum(date('Y-m-d'));
+                    $bestelling->setTijd(time());
+                    try {
+                        $em->persist($bestelling);
+                    } catch (ORMException $e) {
+                        throw new \Exception($e);
+                    }
                 }
             }
             try {

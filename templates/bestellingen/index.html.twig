@@ -1,19 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Bestelling{% endblock %}
-{% block header %} <div class="d-block bg-primary" id="sidebar">
-    <ul class="sidebar-nav">
-        <button class="btn btn-secondary" onclick="location.href='{{ path('receipt') }}?id={{ app.request.get('id') }}'">Bon maken</button>
-        <br>
-        <button class="btn btn-secondary" onclick="location.href='/'">Terug
-        </button>
-        <br>
-        <button class="btn btn-secondary" onclick="location.href='{{ path('reservering_index') }}'">Andere tafel</button>
-        <br>
+{% block header %}
+    <div class="d-block bg-primary" id="sidebar">
+        <ul class="sidebar-nav">
+            <button class="btn btn-secondary"
+                    onclick="location.href='{{ path('receipt') }}?id={{ app.request.get('id') }}'">Bon maken
+            </button>
+            <br>
+            <button class="btn btn-secondary" onclick="location.href='/'">Terug
+            </button>
+            <br>
+            <button class="btn btn-secondary" onclick="location.href='{{ path('reservering_index') }}'">Andere tafel
+            </button>
+            <br>
 
-    </ul>
-</div>
-{% endblock%}
+        </ul>
+    </div>
+{% endblock %}
 {% block body %}
     <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -41,6 +45,8 @@
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    € <input id="input{{ item.MenuItem }}" name="{{ item.MenuItem }}" class="no-border" type="number"
+                             value="{{ item.Prijs }}">
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -52,6 +58,10 @@
                         document.cookie = "{{ item.MenuItem }}=" + clicks;
                         document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
                     });
+                    $('#input{{ item.MenuItem }}').on('change', function () {
+                        var value = $('#input{{ item.MenuItem }}').val();
+                        document.cookie = "prijs{{ item.MenuItem }}=" + value;
+                    })
                 });
             </script>
         {% endfor %}
@@ -71,6 +81,8 @@
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    € <input id="input{{ item.MenuItem }}" name="{{ item.MenuItem }}" class="no-border" type="number"
+                             value="{{ item.Prijs }}">
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -82,6 +94,10 @@
                         document.cookie = "{{ item.MenuItem }}=" + clicks;
                         document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
                     });
+                    $('#input{{ item.MenuItem }}').on('change', function () {
+                        var value = $('#input{{ item.MenuItem }}').val();
+                        document.cookie = "prijs{{ item.MenuItem }}=" + value;
+                    })
                 });
             </script>
         {% endfor %}
@@ -102,6 +118,8 @@
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    € <input id="input{{ item.MenuItem }}" name="{{ item.MenuItem }}" class="no-border" type="number"
+                             value="{{ item.Prijs }}">
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -113,6 +131,10 @@
                         document.cookie = "{{ item.MenuItem }}=" + clicks;
                         document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
                     });
+                    $('#input{{ item.MenuItem }}').on('change', function () {
+                        var value = $('#input{{ item.MenuItem }}').val();
+                        document.cookie = "prijs{{ item.MenuItem }}=" + value;
+                    })
                 });
             </script>
         {% endfor %}
@@ -132,6 +154,8 @@
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    € <input id="input{{ item.MenuItem }}" name="{{ item.MenuItem }}" class="no-border" type="number"
+                             value="{{ item.Prijs }}">
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -143,6 +167,10 @@
                         document.cookie = "{{ item.MenuItem }}=" + clicks;
                         document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
                     });
+                    $('#input{{ item.MenuItem }}').on('change', function () {
+                        var value = $('#input{{ item.MenuItem }}').val();
+                        document.cookie = "prijs{{ item.MenuItem }}=" + value;
+                    })
                 });
             </script>
         {% endfor %}
@@ -162,6 +190,8 @@
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    € <input id="input{{ item.MenuItem }}" name="{{ item.MenuItem }}" class="no-border" type="number"
+                             value="{{ item.Prijs }}">
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -173,6 +203,10 @@
                         document.cookie = "{{ item.MenuItem }}=" + clicks;
                         document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
                     });
+                    $('#input{{ item.MenuItem }}').on('change', function () {
+                        var value = $('#input{{ item.MenuItem }}').val();
+                        document.cookie = "prijs{{ item.MenuItem }}=" + value;
+                    })
                 });
             </script>
         {% endfor %}
@@ -189,10 +223,13 @@
         </thead>
         <tbody>
         {% for item in MenuItem3sub1 %}
-            <<tr>
+            <
+            <tr>
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    € <input id="input{{ item.MenuItem }}" name="{{ item.MenuItem }}" class="no-border" type="number"
+                             value="{{ item.Prijs }}">
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -204,6 +241,10 @@
                         document.cookie = "{{ item.MenuItem }}=" + clicks;
                         document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
                     });
+                    $('#input{{ item.MenuItem }}').on('change', function () {
+                        var value = $('#input{{ item.MenuItem }}').val();
+                        document.cookie = "prijs{{ item.MenuItem }}=" + value;
+                    })
                 });
             </script>
         {% endfor %}
@@ -223,6 +264,8 @@
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    € <input id="input{{ item.MenuItem }}" name="{{ item.MenuItem }}" class="no-border" type="number"
+                             value="{{ item.Prijs }}">
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -234,6 +277,10 @@
                         document.cookie = "{{ item.MenuItem }}=" + clicks;
                         document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
                     });
+                    $('#input{{ item.MenuItem }}').on('change', function () {
+                        var value = $('#input{{ item.MenuItem }}').val();
+                        document.cookie = "prijs{{ item.MenuItem }}=" + value;
+                    })
                 });
             </script>
         {% endfor %}
@@ -250,10 +297,12 @@
         </thead>
         <tbody>
         {% for item in MenuItem4 %}
-           <tr>
+            <tr>
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    € <input id="input{{ item.MenuItem }}" name="{{ item.MenuItem }}" class="no-border" type="number"
+                             value="{{ item.Prijs }}">
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -265,6 +314,10 @@
                         document.cookie = "{{ item.MenuItem }}=" + clicks;
                         document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
                     });
+                    $('#input{{ item.MenuItem }}').on('change', function () {
+                        var value = $('#input{{ item.MenuItem }}').val();
+                        document.cookie = "prijs{{ item.MenuItem }}=" + value;
+                    })
                 });
             </script>
         {% endfor %}
@@ -285,6 +338,8 @@
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    € <input id="input{{ item.MenuItem }}" name="{{ item.MenuItem }}" class="no-border" type="number"
+                             value="{{ item.Prijs }}">
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -296,6 +351,10 @@
                         document.cookie = "{{ item.MenuItem }}=" + clicks;
                         document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
                     });
+                    $('#input{{ item.MenuItem }}').on('change', function () {
+                        var value = $('#input{{ item.MenuItem }}').val();
+                        document.cookie = "prijs{{ item.MenuItem }}=" + value;
+                    })
                 });
             </script>
         {% endfor %}
@@ -316,6 +375,8 @@
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    € <input id="input{{ item.MenuItem }}" name="{{ item.MenuItem }}" class="no-border" type="number"
+                             value="{{ item.Prijs }}">
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -327,6 +388,10 @@
                         document.cookie = "{{ item.MenuItem }}=" + clicks;
                         document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
                     });
+                    $('#input{{ item.MenuItem }}').on('change', function () {
+                        var value = $('#input{{ item.MenuItem }}').val();
+                        document.cookie = "prijs{{ item.MenuItem }}=" + value;
+                    })
                 });
             </script>
         {% endfor %}
@@ -347,6 +412,8 @@
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    € <input id="input{{ item.MenuItem }}" name="{{ item.MenuItem }}" class="no-border" type="number"
+                             value="{{ item.Prijs }}">
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -358,6 +425,10 @@
                         document.cookie = "{{ item.MenuItem }}=" + clicks;
                         document.getElementById('number{{ item.MenuItem|default }}').innerHTML = 'X ' + clicks;
                     });
+                    $('#input{{ item.MenuItem }}').on('change', function () {
+                        var value = $('#input{{ item.MenuItem }}').val();
+                        document.cookie = "prijs{{ item.MenuItem }}=" + value;
+                    })
                 });
             </script>
         {% endfor %}
@@ -374,10 +445,14 @@
         </thead>
         <tbody>
         {% for item in MenuItem8 %}
-           <tr>
+            <tr>
                 <td>
-                    <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
-                            class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <form method="get">
+                        <button type="button" id="button{{ item.MenuItem|default }}" name="menuItem"
+                                value="{{ item.MenuItem }}"
+                                class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                        € <input name="{{ item.MenuItem }}" class="no-border" type="number" value="{{ item.Prijs }}">
+                    </form>
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
             </tr>
@@ -409,8 +484,10 @@
                 <td>
                     <button id="button{{ item.MenuItem|default }}" name="menuItem" value="{{ item.MenuItem }}"
                             class="btn btn-primary">{{ item.MenuItem|default }}</button>
+                    <p>€ {{ item.Prijs }}</p>
                     <div id="number{{ item.MenuItem|default }}"></div>
                 </td>
+
             </tr>
             <script>
                 $(function () {
@@ -427,7 +504,9 @@
     </table>
 
     <button id="annuleren" name="annuleren" class="btn btn-danger">Annuleren</button>
-    <button name="opslaan" class="btn btn-primary" onclick="location.href='/bestellingen/confirm?id={{ app.request.get('id') }}'">Opslaan</button>
+    <button name="opslaan" class="btn btn-primary"
+            onclick="location.href='/bestellingen/confirm?id={{ app.request.get('id') }}'">Opslaan
+    </button>
 
     <script>
         $(function () {
