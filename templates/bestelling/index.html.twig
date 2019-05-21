@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bestelling index{% endblock %}
+{% block title %}Overzicht Kok{% endblock %}
 
 {% block body %}
-    <h1>Bestelling index</h1>
+    <h1>Overzicht kok</h1>
 
     <table class="table">
         <thead>
@@ -14,10 +14,12 @@
         </thead>
         <tbody>
         {% for bestelling in bestellings %}
+            {% if bestelling.Datum == 'now'|date('Y-m-d') %}
             <tr>
                 <td>{{ bestelling.MenuItem }}</td>
                 <td>{{ bestelling.Aantal }}</td>
             </tr>
+            {% endif %}
         {% endfor %}
     </table>
 {% endblock %}

@@ -29,16 +29,4 @@ class BestellingController extends AbstractController
     }
 
 
-    /**
-     * @Route("/{id}", name="bestelling_show", methods={"GET"})
-     * @param Bestelling $bestelling
-     * @return Response
-     */
-    public function show(Bestelling $bestelling): Response
-    {
-        return $this->render('bestelling/show.html.twig', [
-            'bestelling' => $bestelling,
-        ]);
-    }
-
 }

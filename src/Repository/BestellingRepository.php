@@ -27,7 +27,7 @@ class BestellingRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('b')
             ->innerJoin('b.MenuItemcode', 'a')
-            ->select('a.MenuItem', 'b.Aantal')
+            ->select('a.MenuItem', 'b.Aantal', 'b.Datum')
             ->orderBy('b.Tijd', 'ASC')
             ->orderBy('b.Tafel')
             ->getQuery()
@@ -35,11 +35,13 @@ class BestellingRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findAllReceipt()
+    public function findAllReceipt($tafel)
     {
         return $this->createQueryBuilder('b')
             ->innerJoin('b.MenuItemcode', 'a')
             ->select('a.MenuItem', 'b.Aantal', 'b.Tafel', 'b.Prijs', 'b.Datum', 'b.Tijd')
+            ->where('b.Tafel = :tafel')
+            ->setParameter('tafel', $tafel)
             ->orderBy('b.Tijd', 'ASC')
             ->orderBy('b.Tafel')
             ->getQuery()

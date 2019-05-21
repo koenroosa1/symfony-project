@@ -118,13 +118,18 @@ class BestellingenController extends AbstractController
     /**
      * @Route("/bestellingen/confirm", name="bestellingen_confirm")
      * @param Request $request
-     * @param EntityManager $em
+     * @param EntityManagerInterface $em
      * @return Response
      * @throws ORMException
      * @throws OptimisticLockException
      */
     public function confirm(Request $request, EntityManagerInterface $em)
     {
+
+        if ($request->cookies->get('PHPSESSID')){
+            $request->cookies->remove('PHPSESSID');
+        }
+
         $id = $request->get('id');
         //Reservering ophalen
         $reservering = $this->getDoctrine()

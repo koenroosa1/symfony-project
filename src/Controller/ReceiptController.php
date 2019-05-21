@@ -26,12 +26,22 @@ class ReceiptController extends AbstractController
             ->getRepository(Reservering::class)
             ->find($id);
         //Bestellingen ophalen
-        $bestelling = $bestellingRepository->findAllReceipt();
+        $bestelling = $bestellingRepository->findAllReceipt($reservering->getTafel());
 
+        if ($request->isMethod('post')) {
 
-        return $this->render('receipt/index.html.twig', [
+            return $this->render('receipt/index.html.twig', [
+                'reservering' => $reservering,
+                'Bestelling' => $bestelling,
+                'betaald' => $_POST['paid'],
+                'betaalmehtode' => $_POST['paymentmehtod']
+            ]);
+        }
+        return $this->render('receipt/payment.index.twig', [
             'reservering' => $reservering,
             'Bestelling' => $bestelling
+
         ]);
+
     }
 }
