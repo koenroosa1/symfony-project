@@ -81,6 +81,9 @@
     "dompdf/dompdf": {
         "version": "v0.8.3"
     },
+    "easycorp/easy-deploy-bundle": {
+        "version": "v1.0.5"
+    },
     "easycorp/easy-log-handler": {
         "version": "1.0",
         "recipe": {
