@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block body %}
+
+    <!-- Page Content -->
+    <br><br>
+    <form>
+        <select multiple>
+            {% for tafel in Tafels %}
+            <option onclick="location.href='{{ path('bestellingen') }}?id={{ tafel.id }}'">Tafel&nbsp;{{ tafel.tafel }}&nbsp;&nbsp;</option>
+            {% endfor %}
+        </select>
+    </form>
+{% endblock %}

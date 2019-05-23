@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+{% set total = 0 %}
+{% block title %}Bon uitprinten{% endblock %}
+{% block header %}{% endblock %}
+{% block body %}
+
+
+    <div id="pdf">
+        <h2>Bon voor tafel {{ reservering.tafel }}</h2>
+            <button id="pdf" onclick="printPDF()" type="button" class="btn-primary">Pdf gereren</button>
+        <table width="100%">
+            <thead>
+            <tr>
+                <th>Aantal</th>
+                <th>Product</th>
+                <th>Prijs</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in Bestelling %}
+                {% if item.Datum == 'now'|date('Y-m-d') %}
+                    <tr>
+
+                        <td>{{ item.Aantal }} X</td>
+                        <td>{{ item.MenuItem }}</td>
+                        <td>{{ item.Prijs }}</td>
+                        {% set total = total + item.Prijs %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>---------</td>
+            </tr>
+            <tr>
+                <td>Totaal</td>
+                <td></td>
+                <td>{{ total }} euro</td>
+            </tr>
+            <tr>
+                <td>Betaald</td>
+                <td></td>
+                <td>{{ betaald }} euro</td>
+            </tr>
+            <tr>
+                <td>Terug</td>
+                <td></td>
+                <td>{{ betaald - total }} euro</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+            integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+            crossorigin="anonymous"></script>
+    <script>
+        //pdf generator
+        function printPDF() {
+            var doc = new jsPDF();
+
+            var elementHandler = {
+                '#ignorePDF': function (element, renderer) {
+                    return true;
+                }
+            };
+            var source = window.document.getElementById("pdf");
+            doc.fromHTML(
+                source,
+                15,
+                15,
+                {
+                    'width': 180, 'elementHandlers': elementHandler
+                });
+
+            doc.output("dataurlnewwindow");
+            doc.save('{{ 'now'|date('Y-m-d') }}_{{ reservering.tafel }}.pdf');
+        }
+    </script>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+    <div class="d-block bg-primary" id="sidebar">
+        <ul class="sidebar-nav">
+            <button class="btn btn-secondary" onclick="location.href='/'">Terug
+            </button>
+            <br>
+            <button class="btn btn-secondary" onclick="location.href='{{ path('reservering_index') }}'">Andere tafel
+            </button>
+            <br>
+
+        </ul>
+    </div>
+{% endblock %}
+{% block title %}
+    Bon uitprinten
+{% endblock %}
+{% set total = 0 %}
+
+{% block body %}
+
+
+    <h2>Tafel {{ reservering.Tafel }}</h2>
+    {% for item in Bestelling %}
+        {% if item.Datum == 'now'|date('Y-m-d') %}
+            {% set total = total + item.Prijs %}
+        {% endif %}
+    {% endfor %}
+    <h4>Het totaal te betalen bedrag is: {{ total }} euro</h4>
+    <form class="form" method="post" data-parsley-validate id="form">
+        <label>Betaalde bedrag
+            <input name="paid" type="number" class="form-control" min="{{ total }}" required>
+        </label>
+        <label>Betaald methode
+            <select name="paymentmehtod" class="form-control">
+                <option value="1">Contant</option>
+                <option value="2">Pin</option>
+                <option value="3">VVV kaart</option>
+            </select>
+        </label>
+        <input type="submit" value="Opslaan" name="submit" class="btn btn-secondary" style="color: #000;">
+    </form>
+{% endblock %}
+
+
