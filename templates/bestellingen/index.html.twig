@@ -8,7 +8,7 @@
                     onclick="location.href='{{ path('receipt') }}?id={{ app.request.get('id') }}'">Bon maken
             </button>
             <br>
-            <button class="btn btn-secondary" onclick="location.href='/'">Terug
+            <button class="btn btn-secondary" onclick="location.href='{{ path('home') }}'">Terug
             </button>
             <br>
             <button class="btn btn-secondary" onclick="location.href='{{ path('reservering_index') }}'">Andere tafel
@@ -503,18 +503,9 @@
         </tbody>
     </table>
 
-    <button id="annuleren" name="annuleren" class="btn btn-danger">Annuleren</button>
+    <button onclick="location.href='{{ path('home') }}'" id="annuleren" name="annuleren" class="btn btn-danger">Annuleren</button>
     <button name="opslaan" class="btn btn-secondary"
-            onclick="location.href='/bestellingen/confirm?id={{ app.request.get('id') }}'">Opslaan
+            onclick="location.href='{{ path('bestellingen_confirm') }}?id={{ app.request.get('id') }}'">Opslaan
     </button>
-
-    <script>
-        $(function () {
-            var clicks = 0;
-            $('#annuleren').on('click', function () {
-                location.href = '/';
-            });
-        });
-    </script>
     <br><br>
 {% endblock %}

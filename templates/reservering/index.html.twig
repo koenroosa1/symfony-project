@@ -14,19 +14,21 @@
                 <th>Tijd</th>
                 <th>KlantId</th>
                 <th>Aantal</th>
+                <th>Bestelling</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for reservering in reserverings %}
             {% if reservering.datum >= 'now'|date('Y-m-d') %}
-            <tr onclick="location.href='/bestellingen?id={{ reservering.id }}'">
+            <tr onclick="location.href='{{ path('bestellingen') }}?id={{ reservering.id }}'">
                 <td>{{ reservering.id }}</td>
                 <td>{{ reservering.Tafel }}</td>
                 <td>{{ reservering.Datum }}</td>
                 <td>{{ reservering.Tijd }}</td>
                 <td>{{ reservering.KlantId }}</td>
                 <td>{{ reservering.Aantal }}</td>
+                <td><button onclick="location.href='{{ path('bestellingen') }}?id={{ reservering.id }}'" class="btn btn-secondary">Bestelling</button></td>
                 <td>
                     <a href="{{ path('reservering_show', {'id': reservering.id}) }}">show</a>
                     <a href="{{ path('reservering_edit', {'id': reservering.id}) }}">edit</a>

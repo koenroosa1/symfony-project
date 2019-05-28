@@ -179,6 +179,7 @@ class BestellingenController extends AbstractController
                     $bestelling->setTafel($reservering->getTafel());
                     $bestelling->setDatum(date('Y-m-d'));
                     $bestelling->setTijd(time());
+                    $bestelling->setKlaar(0);
                     try {
                         $em->persist($bestelling);
                     } catch (ORMException $e) {
@@ -188,6 +189,7 @@ class BestellingenController extends AbstractController
             }
             try {
                 $em->flush();
+                return $this->redirect('/');
             } catch (OptimisticLockException $e) {
                 throw new OptimisticLockException($e, $bestelling);
             } catch (ORMException $e) {

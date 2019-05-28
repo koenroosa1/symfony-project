@@ -27,7 +27,7 @@ class BestellingRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('b')
             ->innerJoin('b.MenuItemcode', 'a')
-            ->select('a.MenuItem', 'b.Aantal', 'b.Datum', 'a.MenuItemcode')
+            ->select('a.MenuItem', 'b.Aantal', 'b.Datum', 'a.MenuItemcode', 'b.id', 'b.klaar')
             ->orderBy('b.Tijd', 'ASC')
             ->orderBy('b.Tafel')
             ->getQuery()
@@ -47,6 +47,18 @@ class BestellingRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
             ;
+    }
+
+    public function updateBestelling($id)
+    {
+        return $this->createQueryBuilder('b')
+            ->update()
+            ->set('b.klaar', 1)
+            ->where('b.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+
     }
 
 }

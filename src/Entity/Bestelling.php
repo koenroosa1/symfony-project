@@ -54,6 +54,11 @@ class Bestelling
      */
     private $bons;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $klaar;
+
     public function __construct()
     {
         $this->bons = new ArrayCollection();
@@ -62,6 +67,13 @@ class Bestelling
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getTafel(): ?string
@@ -163,6 +175,18 @@ class Bestelling
                 $bon->setTafel(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getKlaar(): ?bool
+    {
+        return $this->klaar;
+    }
+
+    public function setKlaar(bool $klaar): self
+    {
+        $this->klaar = $klaar;
 
         return $this;
     }

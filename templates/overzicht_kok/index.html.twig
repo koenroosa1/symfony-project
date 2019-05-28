@@ -4,28 +4,126 @@
 
 {% block body %}
     <h1>Overzicht kok</h1>
-
+    <h2>Gerechten die nog moeten</h2>
     <table class="table">
         <thead>
         <tr>
             <th>Gerecht</th>
             <th>Aantal</th>
+            <th>Klaar?</th>
         </tr>
         </thead>
         <tbody>
         {% for bestelling in bestellings %}
-            {% if bestelling.Datum == 'now'|date('Y-m-d') %}
-                {% if bestelling.MenuItemcode == 1 or bestelling.MenuItemcode == 2 or bestelling.MenuItemcode == 3 or bestelling.MenuItemcode == 8 or bestelling.MenuItemcode == 9 %}
-                    <tr>
-                        <td>{{ bestelling.MenuItem }}</td>
-                        <td>{{ bestelling.Aantal }}</td>
-                    </tr>
+            {% if bestelling.klaar != 1 %}
+                {% if bestelling.Datum == 'now'|date('Y-m-d') %}
+                    {% if bestelling.MenuItemcode == 1 or bestelling.MenuItemcode == 2 or bestelling.MenuItemcode == 3 or bestelling.MenuItemcode == 8 or bestelling.MenuItemcode == 9 %}
+                        <tr>
+                            <td>{{ bestelling.MenuItem }}</td>
+                            <td>{{ bestelling.Aantal }}</td>
+                            <td><label>Klaar?
+                                    <input onclick="location.href='add?id={{ bestelling.id }}'" type="checkbox"
+                                           value="1" name="klaar">
+                                </label></td>
+                        </tr>
+                    {% endif %}
                 {% endif %}
             {% endif %}
         {% else %}
             <tr>
                 <td colspan="7">Geen overzicht gevonden</td>
             </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Gerechten die klaar zijn</h2>
+    <table class="table">
+
+        <thead>
+        <tr>
+            <th>Gerecht</th>
+            <th>Aantal</th>
+            <th>Klaar?</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bestelling in bestellings %}
+            {% if bestelling.klaar == 1 %}
+                {% if bestelling.Datum == 'now'|date('Y-m-d') %}
+                    {% if bestelling.MenuItemcode == 1 or bestelling.MenuItemcode == 2 or bestelling.MenuItemcode == 3 or bestelling.MenuItemcode == 8 or bestelling.MenuItemcode == 9 %}
+                        <tr>
+                            <td>{{ bestelling.MenuItem }}</td>
+                            <td>{{ bestelling.Aantal }}</td>
+                            <td><label>Klaar?
+                                    <input onclick="location.href='add?id={{ bestelling.id }}'" type="checkbox"
+                                           value="1" name="klaar">
+                                </label></td>
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </table>
+
+    <h1>Overzicht barman</h1>
+    <h2>drankjes die nog moeten</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>drankje</th>
+            <th>Aantal</th>
+            <th>Klaar?</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bestelling in bestellings %}
+            {% if bestelling.klaar != 1 %}
+                {% if bestelling.Datum == 'now'|date('Y-m-d') %}
+                    {% if bestelling.MenuItemcode == 4 or bestelling.MenuItemcode == 5 or bestelling.MenuItemcode == 6 or bestelling.MenuItemcode == 7 %}
+                        <tr>
+                            <td>{{ bestelling.MenuItem }}</td>
+                            <td>{{ bestelling.Aantal }}</td>
+                            <td><label>Klaar?
+                                    <input onclick="location.href='add?id={{ bestelling.id }}'" type="checkbox"
+                                           value="1" name="klaar">
+                                </label></td>
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="7">Geen overzicht gevonden</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Drankjes die klaar zijn</h2>
+    <table class="table">
+
+        <thead>
+        <tr>
+            <th>Drankje</th>
+            <th>Aantal</th>
+            <th>Klaar?</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bestelling in bestellings %}
+            {% if bestelling.klaar == 1 %}
+                {% if bestelling.Datum == 'now'|date('Y-m-d') %}
+                    {% if bestelling.MenuItemcode == 4 or bestelling.MenuItemcode == 5 or bestelling.MenuItemcode == 6 or bestelling.MenuItemcode == 7 %}
+                        <tr>
+                            <td>{{ bestelling.MenuItem }}</td>
+                            <td>{{ bestelling.Aantal }}</td>
+                            <td><label>Klaar?
+                                    <input onclick="location.href='add?id={{ bestelling.id }}'" type="checkbox"
+                                           value="1" name="klaar">
+                                </label></td>
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
         {% endfor %}
     </table>
 {% endblock %}
