@@ -43,7 +43,6 @@
         <tr>
             <th>Gerecht</th>
             <th>Aantal</th>
-            <th>Klaar?</th>
         </tr>
         </thead>
         <tbody>
@@ -54,10 +53,6 @@
                         <tr>
                             <td>{{ bestelling.MenuItem }}</td>
                             <td>{{ bestelling.Aantal }}</td>
-                            <td><label>Klaar?
-                                    <input onclick="location.href='add?id={{ bestelling.id }}'" type="checkbox"
-                                           value="1" name="klaar">
-                                </label></td>
                         </tr>
                     {% endif %}
                 {% endif %}
@@ -105,7 +100,6 @@
         <tr>
             <th>Drankje</th>
             <th>Aantal</th>
-            <th>Klaar?</th>
         </tr>
         </thead>
         <tbody>
@@ -116,10 +110,6 @@
                         <tr>
                             <td>{{ bestelling.MenuItem }}</td>
                             <td>{{ bestelling.Aantal }}</td>
-                            <td><label>Klaar?
-                                    <input onclick="location.href='add?id={{ bestelling.id }}'" type="checkbox"
-                                           value="1" name="klaar">
-                                </label></td>
                         </tr>
                     {% endif %}
                 {% endif %}

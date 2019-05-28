@@ -43,5 +43,17 @@ class OverzichtKokController extends AbstractController
         return $this->redirect('/overzicht_kok');
     }
 
+    /**
+     * @param BestellingRepository $bestellingRepository
+     * @return Response
+     * @Route("/ober")
+     */
+    public function barman(BestellingRepository $bestellingRepository)
+    {
+        return $this->render('overzicht_kok/barman.html.twig', [
+            'bestellings' => $bestellingRepository->findAllGrouped()
+        ]);
+    }
+
 
 }
