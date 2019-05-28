@@ -27,7 +27,7 @@
         {% endif %}
     {% endfor %}
     <h4>Het totaal te betalen bedrag is: {{ total }} euro</h4>
-    <form class="form" method="post" data-parsley-validate id="form">
+    <form class="form" method="post" id="form">
         <label>Betaalde bedrag
             <input name="paid" type="number" class="form-control" min="{{ total }}" required>
         </label>
