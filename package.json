@@ -13,7 +13,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "jspdf": "^1.5.3",
         "parsley": "^0.1.0"
     }
