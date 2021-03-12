@@ -14,7 +14,7 @@
     },
     "dependencies": {
         "jquery": "^3.4.1",
-        "jspdf": "^1.5.3",
+        "jspdf": "^2.3.1",
         "parsley": "^0.1.0"
     }
 }
